@@ -24,7 +24,7 @@ async function addNote(title) {
     // console.log(note)
     notes.push(note)
 
-    await fs.writeFile(notesPath, JSON.stringify(notes))
+    await saveNotes(notes)
     console.log(chalk.bgGreen('Note was added!'))
 }
 // addNote('Test!')
@@ -42,21 +42,24 @@ async function removeNote(id) {
 
     const newNotes = notes.filter((note) => {
         // console.log(note.id, id, note.id.toString() !== id.toString())
-        return note.id.toString() !== id.toString()
+        return note.id !== id
     })
 
     // console.log(newNotes)
 
-    await fs.writeFile(notesPath, JSON.stringify(newNotes))
-    console.log(chalk.bgGreen('Note was removed!'))
+    await saveNotes(newNotes)
+    console.log(chalk.red(`Note with id ${id} was removed!`))
 }
 async function printNotes() {
     const notes = await getNotes()
 
     console.log(chalk.bgBlue('Here is the list of notes:'))
     notes.forEach((note) => {
-        console.log(chalk.blue(note.id) + ' ' + chalk.blue(note.title))
+        console.log(chalk.bgWhite(note.id), chalk.blue(note.title))
     })
+}
+async function saveNotes(notes) {
+    await fs.writeFile(notesPath, JSON.stringify(notes))
 }
 
 module.exports = {

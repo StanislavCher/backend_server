@@ -57,6 +57,13 @@ yargs.command({
 yargs.command({
     command: 'remove',
     describe: 'Remove note by id',
+    builder: {
+        id: {
+            type: 'string',
+            describe: 'Note uniq id',
+            demandOption: true
+        }
+    },
     async handler({id}) {
         // console.log('List command')
         // console.log(getNotes())
