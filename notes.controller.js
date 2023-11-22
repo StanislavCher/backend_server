@@ -50,6 +50,24 @@ async function removeNote(id) {
     await saveNotes(newNotes)
     console.log(chalk.red(`Note with id ${id} was removed!`))
 }
+async function updateNote(id, newTitle) {
+    // return require('./db.json')
+    const notes = await getNotes()
+
+    //console.log(notes)
+    // console.log(id)
+
+    const newNotes = notes.map((note) => {
+        // console.log(note.id, id, note.id.toString() !== id.toString())
+        if (note.id === id) return {id, title: newTitle}
+        else return note
+    })
+
+    // console.log(newNotes)
+
+    await saveNotes(newNotes)
+    console.log(chalk.red(`Note with id ${id} was edited by new title ${newTitle}!`))
+}
 async function printNotes() {
     const notes = await getNotes()
 
@@ -63,5 +81,5 @@ async function saveNotes(notes) {
 }
 
 module.exports = {
-    addNote, removeNote, printNotes
+    addNote, removeNote, printNotes, getNotes, updateNote
 }
