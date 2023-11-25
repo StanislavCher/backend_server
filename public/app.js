@@ -26,5 +26,17 @@ async function remove(id){
 }
 
 async function edit(id, newTitle) {
-    await fetch(`/?id=${id}&title=${newTitle}`, { method: 'PUT' })
+    const reqBody = {
+        id: id,
+        title: newTitle
+    }
+    // console.log(reqBody)
+    await fetch('/', {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(reqBody)
+    })
+    // await fetch(`/?id=${id}&title=${newTitle}`, { method: 'PUT' })
 }

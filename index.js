@@ -89,6 +89,7 @@ app.use(express.static(path.resolve(__dirname, 'public')))
 app.use(express.urlencoded({
     extended: true
 }))
+app.use(express.json())
 app.set('view engine', 'ejs')
 app.set('views', 'pages')
 app.get('/',async (req, res) => {
@@ -120,8 +121,11 @@ app.delete('/:id', async (req, res) => {
     })
 })
 app.put('/', async (req, res) => {
-    console.log(req.query)
-    await updateNote(req.query.id, req.query.title)
+    // console.log(req.query)
+    // console.log(req)
+    // console.log(req.body)
+    // await updateNote(req.query.id, req.query.title)
+    await updateNote(req.body.id, req.body.title)
     res.render('index', {
         title: 'Express App',
         notes: await getNotes(),
