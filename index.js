@@ -20,88 +20,88 @@
 //
 // console.log(process.argv[2])
 //
-const yargs = require('yargs')
+// const yargs = require('yargs')
 // const pkg = require('./package.json')
 // const { addNote, removeNote, printNotes} = require('./notes.controller')
-const { addNote, getNotes, removeNote, updateNote, printNotes} = require("./notes.controller");
+// const { addNote, getNotes, removeNote, updateNote, printNotes} = require("./notes.controller");
 //
 // yargs.version(pkg.version)
 //
-yargs.command({
-    command: 'add',
-    describe: 'Add new note to list',
-    builder: {
-        title: {
-            type: 'string',
-            describe: 'Note title',
-            demandOption: true
-        }
-    },
-    async handler({ title }) {
-        // console.log('Add command:', title)
-        await addNote(title)
-    }
-})
-
-yargs.command({
-    command: 'list',
-    describe: 'Print all notes',
-    async handler() {
-        // console.log('List command')
-        // console.log(getNotes())
-        // const notes = await printNotes()
-        // console.log(notes)
-        await printNotes()
-    }
-})
-
-yargs.command({
-    command: 'remove',
-    describe: 'Remove note by id',
-    builder: {
-        id: {
-            type: 'string',
-            describe: 'Note uniq id',
-            demandOption: true
-        }
-    },
-    async handler({id}) {
-        // console.log('List command')
-        // console.log(getNotes())
-        // const notes = await printNotes()
-        //console.log(id)
-        await removeNote(id)
-    }
-})
-
-yargs.command({
-    command: 'edit',
-    describe: 'Edit note by id',
-    builder: {
-        id: {
-            type: 'string',
-            describe: 'Note id',
-            demandOption: true
-        },
-        title: {
-            type: 'string',
-            describe: 'Note title',
-            demandOption: true
-        }
-    },
-    async handler({ id, title }) {
-        // console.log('Add command:', title)
-        await updateNote(id, title)
-    }
-})
-
-yargs.parse()
+// yargs.command({
+//     command: 'add',
+//     describe: 'Add new note to list',
+//     builder: {
+//         title: {
+//             type: 'string',
+//             describe: 'Note title',
+//             demandOption: true
+//         }
+//     },
+//     async handler({ title }) {
+//         // console.log('Add command:', title)
+//         await addNote(title)
+//     }
+// })
+//
+// yargs.command({
+//     command: 'list',
+//     describe: 'Print all notes',
+//     async handler() {
+//         // console.log('List command')
+//         // console.log(getNotes())
+//         // const notes = await printNotes()
+//         // console.log(notes)
+//         await printNotes()
+//     }
+// })
+//
+// yargs.command({
+//     command: 'remove',
+//     describe: 'Remove note by id',
+//     builder: {
+//         id: {
+//             type: 'string',
+//             describe: 'Note uniq id',
+//             demandOption: true
+//         }
+//     },
+//     async handler({id}) {
+//         // console.log('List command')
+//         // console.log(getNotes())
+//         // const notes = await printNotes()
+//         //console.log(id)
+//         await removeNote(id)
+//     }
+// })
+//
+// yargs.command({
+//     command: 'edit',
+//     describe: 'Edit note by id',
+//     builder: {
+//         id: {
+//             type: 'string',
+//             describe: 'Note id',
+//             demandOption: true
+//         },
+//         title: {
+//             type: 'string',
+//             describe: 'Note title',
+//             demandOption: true
+//         }
+//     },
+//     async handler({ id, title }) {
+//         // console.log('Add command:', title)
+//         await updateNote(id, title)
+//     }
+// })
+//
+// yargs.parse()
 
 // const http = require('http')
 const chalk = require('chalk')
 // const fs = require('fs/promises')
 const path = require('path')
-// const { addNote, getNotes, removeNote, updateNote} = require("./notes.controller");
+const { addNote, getNotes, removeNote, updateNote} = require("./notes.controller");
 // const basePath = path.join(__dirname, 'pages')
 const port = 3000
 const express = require('express')
@@ -154,6 +154,6 @@ app.put('/', async (req, res) => {
         created: false
     })
 })
-// app.listen(port, () => {
-//     console.log(chalk.green(`Server has been started on port ${port}...`))
-// })
+app.listen(port, () => {
+    console.log(chalk.green(`Server has been started on port ${port}...`))
+})
